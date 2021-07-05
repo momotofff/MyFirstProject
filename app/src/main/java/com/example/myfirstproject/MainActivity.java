@@ -1,20 +1,23 @@
 package com.example.myfirstproject;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.icu.math.BigDecimal;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity
 {
     TextView window;
-    int list;
+    String[] stringOperations;
+    BigDecimal bg;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -22,13 +25,13 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         window = findViewById(R.id.window);
         window.setText("0");
-        list = 0;
+        bg = new BigDecimal("");
+
     }
 
     public void onClickButtonNumber(View v)
     {
-        String str = window.getText().toString();
-        if(str.equals("0") | str.equals("+") | str.equals("-"))
+        if (window.getText().toString().equals("0"))
             window.setText(((Button)v).getText().toString());
         else
             window.setText(window.getText().toString() + ((Button)v).getText().toString());
@@ -36,19 +39,41 @@ public class MainActivity extends AppCompatActivity
 
     public void onClickButtonPlus(View v)
     {
-        int oui = Integer.parseInt(window.getText().toString()) + list;
-        list = oui;
-        window.setText("+");
+        if (window.getText().toString().equals("0"))
+            window.setText(window.getText().toString());
+        else if (String.valueOf((window.getText().toString()).charAt(window.getText().toString().length() - 2)).equals("+")
+                | String.valueOf((window.getText().toString()).charAt(window.getText().toString().length() - 2)).equals("-"))
+                window.setText(window.getText().toString());
+        else
+                window.setText(window.getText().toString() + " " + ((Button)v).getText().toString() + " ");
     }
 
+    public void onClickButtonMinus(View v)
+    {
+        if (window.getText().toString().equals("0"))
+            window.setText(window.getText().toString());
+        else if (String.valueOf((window.getText().toString()).charAt(window.getText().toString().length() - 2)).equals("+")
+                | String.valueOf((window.getText().toString()).charAt(window.getText().toString().length() - 2)).equals("-"))
+                window.setText(window.getText().toString());
+        else
+                window.setText(window.getText().toString() + " " + ((Button)v).getText().toString() + " ");
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void onClickButtonResult(View v)
     {
-        window.setText(list + "");
+        stringOperations = window.getText().toString().split(" ");
+
+        for (int i = 1; i < stringOperations.length; i++)
+        {
+            bg = BigDecimal.valueOf(Double.parseDouble(stringOperations[0]));
+        }
+
     }
 
     public void onClickButtonDelete(View v)
     {
-        list = 0;
         window.setText("0");
+
     }
 }
