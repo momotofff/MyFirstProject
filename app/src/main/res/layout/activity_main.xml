@@ -217,7 +217,7 @@
         android:id="@+id/plus"
         android:layout_width="81dp"
         android:layout_height="53dp"
-        android:onClick="onClickButtonNumber"
+        android:onClick="onClickButtonPlus"
         android:text="@string/plus"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -6,12 +6,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
 {
     TextView window;
+    int list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -20,34 +22,33 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         window = findViewById(R.id.window);
         window.setText("0");
-        List<Integer> list = new ArrayList<>();
+        list = 0;
     }
 
     public void onClickButtonNumber(View v)
     {
         String str = window.getText().toString();
-        if(str.equals("0"))
+        if(str.equals("0") | str.equals("+") | str.equals("-"))
             window.setText(((Button)v).getText().toString());
         else
             window.setText(window.getText().toString() + ((Button)v).getText().toString());
     }
 
+    public void onClickButtonPlus(View v)
+    {
+        int oui = Integer.parseInt(window.getText().toString()) + list;
+        list = oui;
+        window.setText("+");
+    }
+
     public void onClickButtonResult(View v)
     {
-        List<String> list = new ArrayList<>();
-        char[] allValues = (window.getText().toString().toCharArray());
-        String oneValue;
-        String twoValue;
-
-        for (int i = 0; i < allValues.length; ++i)
-        {
-
-        }
-        //window.setText(window.getText().toString() + ((Button)v).getText().toString());
+        window.setText(list + "");
     }
 
     public void onClickButtonDelete(View v)
     {
+        list = 0;
         window.setText("0");
     }
 }
