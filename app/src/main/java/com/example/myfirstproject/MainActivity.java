@@ -9,8 +9,32 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
 {
-    TextView window;
-    String[] stringOperations;
+    private TextView window;
+    private static final String Zero = "0";
+
+    private enum Op
+    {
+        PLUS,
+        MINUS,
+        MULTIPLY,
+        UNDEFINED,
+    }
+
+    private class Operation
+    {
+        final public Op value;
+
+        Operation (char ch)
+        {
+            switch (ch)
+            {
+                case '+': value = Op.PLUS; break;
+                case '-': value = Op.MINUS; break;
+                case '*': value = Op.MULTIPLY; break;
+                default: value = Op.UNDEFINED; break;
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -18,58 +42,63 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         window = findViewById(R.id.window);
-        window.setText("0");
+        window.setText(Zero);
     }
 
     public void onClickButtonNumber(View v)
     {
-        if (window.getText().toString().equals("0"))
-            window.setText(((Button)v).getText().toString());
+        String text = window.getText().toString();
+        String buttonText = ((Button) v).getText().toString();
+
+        if (Zero.equals(text))
+            window.setText(buttonText);
         else
-            window.setText(window.getText().toString() + ((Button)v).getText().toString());
+            window.setText(text + buttonText);
     }
 
     public void onClickButtonOperations(View v)
     {
-        if (window.getText().toString().equals("0"))
-            window.setText(window.getText().toString());
-        else if (String.valueOf((window.getText().toString()).charAt(window.getText().toString().length() - 1)).equals("+")
-                | String.valueOf((window.getText().toString()).charAt(window.getText().toString().length() - 1)).equals("-")
-                | String.valueOf((window.getText().toString()).charAt(window.getText().toString().length() - 1)).equals("*"))
+        String text = window.getText().toString();
+        Operation op = new Operation(text.charAt(text.length() - 1));
 
-                window.setText(window.getText().toString());
-        else
-                window.setText(window.getText().toString() + " " + ((Button)v).getText().toString() + " ");
+        if (op.value == Op.UNDEFINED)
+            window.setText(text + " " + ((Button) v).getText().toString() + " ");
     }
 
     public void onClickButtonResult(View v)
     {
-        stringOperations = window.getText().toString().split(" ");
-        long res = Integer.parseInt(stringOperations[0]);
+        String[] stringOperations = window.getText().toString().split(" ");
+
+        Long result = Long.parseLong(stringOperations[0]);
 
         for (int i = 1; i < stringOperations.length - 1; ++i)
         {
-            if (stringOperations[i].equals("+"))
+            Operation op = new Operation(stringOperations[i].charAt(0));
+            long second;
+
+            try
             {
-                res += Long.parseLong(stringOperations[i + 1]);
+                second = Long.parseLong(stringOperations[i + 1]);
+            }
+            catch (Exception e)
+            {
+                window.setText(Zero);
+                return;
             }
 
-            if (stringOperations[i].equals("-"))
+            switch (op.value)
             {
-                res -= Long.parseLong(stringOperations[i + 1]);
-            }
-            if (stringOperations[i].equals("*"))
-            {
-                res *= Long.parseLong(stringOperations[i + 1]);
+                case PLUS:      result += second; break;
+                case MINUS:     result -= second; break;
+                case MULTIPLY:  result *= second; break;
             }
         }
 
-        window.setText(res + "");
+        window.setText(result.toString());
     }
 
     public void onClickButtonDelete(View v)
     {
-        window.setText("0");
-
+        window.setText(Zero);
     }
 }
