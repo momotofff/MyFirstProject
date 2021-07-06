@@ -7,6 +7,21 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/_multiply"
+        android:layout_width="82dp"
+        android:layout_height="51dp"
+        android:onClick="onClickButtonOperations"
+        android:text="@string/_multiply"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.629"
+        tools:ignore="UsingOnClickInXml" />
+
+    <Button
         android:id="@+id/_null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -100,7 +115,7 @@
         android:id="@+id/minus"
         android:layout_width="81dp"
         android:layout_height="53dp"
-        android:onClick="onClickButtonMinus"
+        android:onClick="onClickButtonOperations"
         android:text="@string/minus"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -217,7 +232,7 @@
         android:id="@+id/plus"
         android:layout_width="81dp"
         android:layout_height="53dp"
-        android:onClick="onClickButtonPlus"
+        android:onClick="onClickButtonOperations"
         android:text="@string/plus"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -228,15 +243,5 @@
         app:layout_constraintVertical_bias="0.32"
         tools:ignore="UsingOnClickInXml"
         tools:text="+" />
-
-    <TextView
-        android:id="@+id/window2"
-        android:layout_width="150dp"
-        android:layout_height="57dp"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.16"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
