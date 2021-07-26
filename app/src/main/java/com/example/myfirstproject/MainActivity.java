@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.math.BigDecimal;
+
 
 public class MainActivity extends AppCompatActivity
 {
@@ -68,17 +70,16 @@ public class MainActivity extends AppCompatActivity
     public void onClickButtonResult(View v)
     {
         String[] stringOperations = window.getText().toString().split(" ");
-
-        Long result = Long.parseLong(stringOperations[0]);
+        BigDecimal result = new BigDecimal(stringOperations[0]);
 
         for (int i = 1; i < stringOperations.length - 1; ++i)
         {
             Operation op = new Operation(stringOperations[i].charAt(0));
-            long second;
+            BigDecimal second;
 
             try
             {
-                second = Long.parseLong(stringOperations[i + 1]);
+                second = new BigDecimal(stringOperations[i + 1]);
             }
             catch (Exception e)
             {
@@ -88,9 +89,9 @@ public class MainActivity extends AppCompatActivity
 
             switch (op.value)
             {
-                case PLUS:      result += second; break;
-                case MINUS:     result -= second; break;
-                case MULTIPLY:  result *= second; break;
+                case PLUS:      result = result.add(second); break;
+                case MINUS:     result = result.subtract(second); break;
+                case MULTIPLY:  result = result.multiply(second); break;
             }
         }
 
