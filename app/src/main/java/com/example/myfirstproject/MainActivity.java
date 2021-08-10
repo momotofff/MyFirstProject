@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity
         PLUS,
         MINUS,
         MULTIPLY,
+        DIVISION,
+        SQUAREROOT,
         UNDEFINED,
     }
 
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity
                 case '+': value = Op.PLUS; break;
                 case '-': value = Op.MINUS; break;
                 case '*': value = Op.MULTIPLY; break;
+                case '/': value = Op.DIVISION; break;
+                case '√': value = Op.SQUAREROOT; break;
                 default: value = Op.UNDEFINED; break;
             }
         }
@@ -65,6 +69,10 @@ public class MainActivity extends AppCompatActivity
 
         if (op.value == Op.UNDEFINED)
             window.setText(text + " " + ((Button) v).getText().toString() + " ");
+
+        if (op.value == Op.SQUAREROOT)
+            onClickButtonResult(window);
+
     }
 
     public void onClickButtonResult(View v)
@@ -89,9 +97,11 @@ public class MainActivity extends AppCompatActivity
 
             switch (op.value)
             {
-                case PLUS:      result = result.add(second); break;
-                case MINUS:     result = result.subtract(second); break;
-                case MULTIPLY:  result = result.multiply(second); break;
+                case PLUS:          result = result.add(second); break;
+                case MINUS:         result = result.subtract(second); break;
+                case MULTIPLY:      result = result.multiply(second); break;
+                case DIVISION:      result = result.divide(second); break;
+                case SQUAREROOT:    result = BigDecimal.valueOf(Math.sqrt(second.doubleValue())); break;
             }
         }
 
