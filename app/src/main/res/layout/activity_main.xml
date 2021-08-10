@@ -242,6 +242,15 @@
             android:text="@string/squareRoot"
             android:textSize="24sp"
             tools:ignore="UsingOnClickInXml" />
+
+        <Button
+            android:id="@+id/percent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClickButtonOperations"
+            android:text="@string/percent"
+            android:textSize="24sp"
+            tools:ignore="UsingOnClickInXml" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

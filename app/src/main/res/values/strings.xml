@@ -18,4 +18,5 @@
     <string name="division">/</string>
     <string name="dot">.</string>
     <string name="squareRoot">√</string>
+    <string name="percent">%</string>
 </resources>
