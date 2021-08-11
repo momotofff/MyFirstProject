@@ -14,10 +14,9 @@ import java.math.BigDecimal;
 public class MainActivity extends AppCompatActivity
 {
     private TextView window;
+
     private static final String Zero = "0";
-    String name ="undefined";
-    final static String nameVariableKey = "NAME_VARIABLE";
-    final static String textViewTexKey = "TEXTVIEW_TEXT";
+    private static final String TextViewTextKey = "TEXTVIEW_TEXT";
 
     private enum Op
     {
@@ -119,22 +118,19 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-
-        name = savedInstanceState.getString(nameVariableKey);
-        String textViewText= savedInstanceState.getString(textViewTexKey);
+    protected void onSaveInstanceState(Bundle outState) {
         TextView nameView = (TextView) findViewById(R.id.window);
-        nameView.setText(textViewText);
+        outState.putString(TextViewTextKey, nameView.getText().toString());
+
+        super.onSaveInstanceState(outState);
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
 
-        outState.putString(nameVariableKey, name);
+        String textViewText= savedInstanceState.getString(TextViewTextKey);
         TextView nameView = (TextView) findViewById(R.id.window);
-        outState.putString(textViewTexKey, nameView.getText().toString());
-
-        super.onSaveInstanceState(outState);
+        nameView.setText(textViewText);
     }
 }
