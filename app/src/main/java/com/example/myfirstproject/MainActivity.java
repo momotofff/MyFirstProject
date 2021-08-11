@@ -1,7 +1,9 @@
 package com.example.myfirstproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,7 +14,9 @@ import java.math.BigDecimal;
 public class MainActivity extends AppCompatActivity
 {
     private TextView window;
+
     private static final String Zero = "0";
+    private static final String TextViewTextKey = "TEXTVIEW_TEXT";
 
     private enum Op
     {
@@ -111,5 +115,22 @@ public class MainActivity extends AppCompatActivity
     public void onClickButtonDelete(View v)
     {
         window.setText(Zero);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        TextView nameView = (TextView) findViewById(R.id.window);
+        outState.putString(TextViewTextKey, nameView.getText().toString());
+
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        String textViewText= savedInstanceState.getString(TextViewTextKey);
+        TextView nameView = (TextView) findViewById(R.id.window);
+        nameView.setText(textViewText);
     }
 }
