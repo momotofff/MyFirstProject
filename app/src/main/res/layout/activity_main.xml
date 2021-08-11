@@ -166,7 +166,6 @@
             android:text="@string/_6"
             android:textSize="24sp"
             tools:ignore="UsingOnClickInXml" />
-
         <Button
             android:id="@+id/nulNul"
             android:layout_width="match_parent"
