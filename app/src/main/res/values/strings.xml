@@ -19,4 +19,5 @@
     <string name="dot">.</string>
     <string name="squareRoot">√</string>
     <string name="percent">%</string>
+    <string name="_nulNul">00</string>
 </resources>

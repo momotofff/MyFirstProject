@@ -1,7 +1,9 @@
 package com.example.myfirstproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,6 +15,9 @@ public class MainActivity extends AppCompatActivity
 {
     private TextView window;
     private static final String Zero = "0";
+    String name ="undefined";
+    final static String nameVariableKey = "NAME_VARIABLE";
+    final static String textViewTexKey = "TEXTVIEW_TEXT";
 
     private enum Op
     {
@@ -111,5 +116,25 @@ public class MainActivity extends AppCompatActivity
     public void onClickButtonDelete(View v)
     {
         window.setText(Zero);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        name = savedInstanceState.getString(nameVariableKey);
+        String textViewText= savedInstanceState.getString(textViewTexKey);
+        TextView nameView = (TextView) findViewById(R.id.window);
+        nameView.setText(textViewText);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+        outState.putString(nameVariableKey, name);
+        TextView nameView = (TextView) findViewById(R.id.window);
+        outState.putString(textViewTexKey, nameView.getText().toString());
+
+        super.onSaveInstanceState(outState);
     }
 }
