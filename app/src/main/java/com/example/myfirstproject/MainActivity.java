@@ -13,34 +13,30 @@ import java.math.BigDecimal;
 public class MainActivity extends AppCompatActivity
 {
     private TextView window;
+    private boolean isValid = true;
 
     private static final String Zero = "0";
     private static final String TextViewTextKey = "TEXTVIEW_TEXT";
-    private static final String DivisionByZero = "Делить на ноль нельзя!!!";
-    private static final String Error = "Error";
 
-    private enum Op
-    {
+    private enum Op {
         PLUS,
         MINUS,
         MULTIPLY,
-        DIVISION,
+        DIVIDE,
         SQUAREROOT,
         UNDEFINED,
     }
 
-    private static class Operation
-    {
+    private static class Operation {
         final public Op value;
 
-        Operation (char ch)
-        {
+        Operation (char ch) {
             switch (ch)
             {
                 case '+': value = Op.PLUS; break;
                 case '-': value = Op.MINUS; break;
                 case '*': value = Op.MULTIPLY; break;
-                case '/': value = Op.DIVISION; break;
+                case '/': value = Op.DIVIDE; break;
                 case '√': value = Op.SQUAREROOT; break;
                 default: value = Op.UNDEFINED; break;
             }
@@ -48,20 +44,23 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         window = findViewById(R.id.window);
         window.setText(Zero);
+    }
 
+    private void CheckValidityAndReset() {
+        if (!isValid) {
+            isValid = true;
+            window.setText(Zero);
+        }
     }
 
     @SuppressLint("SetTextI18n")
-    public void onClickButtonNumber(View v)
-    {
-        if (window.getText().equals(DivisionByZero) || window.getText().equals(Error))
-            window.setText(Zero);
+    public void onClickButtonNumber(View v) {
+        CheckValidityAndReset();
 
         String text = window.getText().toString();
         String buttonText = ((Button) v).getText().toString();
@@ -73,10 +72,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     @SuppressLint("SetTextI18n")
-    public void onClickButtonOperations(View v)
-    {
-        if (window.getText().equals(DivisionByZero) || window.getText().equals(Error))
-            window.setText(Zero);
+    public void onClickButtonOperations(View v) {
+        CheckValidityAndReset();
 
         String text = window.getText().toString();
         Operation op = new Operation(text.charAt(text.length() - 1));
@@ -85,69 +82,64 @@ public class MainActivity extends AppCompatActivity
             window.setText(text + " " + ((Button) v).getText().toString() + " ");
     }
 
-    @SuppressLint("SetTextI18n")
-    public void onClickButtonResult(View v)
-    {
+    public void onClickButtonResult(View v) {
         String[] stringOperations = window.getText().toString().split(" ");
         BigDecimal result = new BigDecimal(stringOperations[0]);
 
-        for (int i = 1; i < stringOperations.length - 1; ++i)
-        {
+        for (int i = 1; i < stringOperations.length - 1; ++i) {
             Operation op = new Operation(stringOperations[i].charAt(0));
             BigDecimal second;
 
-            try
-            {
+            try {
                 second = new BigDecimal(stringOperations[i + 1]);
-
             }
-            catch (Exception e)
-            {
+            catch (Exception e) {
                 window.setText(Zero);
                 return;
             }
 
-            if (op.value.equals(Op.PLUS))
-                result = result.add(second);
-
-            else if (op.value.equals(Op.MINUS))
-                result = result.subtract(second);
-
-            else if (op.value.equals(Op.MULTIPLY))
-                result = result.multiply(second);
-
-            else if (op.value.equals(Op.DIVISION))
+            switch (op.value)
             {
-                if (second.intValue() == 0)
-                {
-                    window.setText(DivisionByZero);
+                case PLUS:
+                    result = result.add(second);
                     break;
-                }
-                else
-                    result = result.divide(second);
+                case MINUS:
+                    result = result.subtract(second);
+                    break;
+                case MULTIPLY:
+                    result = result.multiply(second);
+                    break;
+                case DIVIDE:
+                    if (second.doubleValue() == 0) {
+                        isValid = false;
+                        window.setText(getResources().getString(R.string.DivisionByZeroError));
+                    }
+                    else {
+                        result = result.divide(second, 8, BigDecimal.ROUND_HALF_UP);
+                    }
+                    break;
+                case SQUAREROOT:
+                    if (second.intValue() < 0) {
+                        isValid = false;
+                        window.setText(getResources().getString(R.string.GenericError));
+                    }
+                    else {
+                        result = BigDecimal.valueOf(Math.sqrt(second.doubleValue()));
+                    }
+                    break;
             }
 
-            else if (op.value.equals(Op.SQUAREROOT))
-            {
-                if (second.intValue() < 0)
-                {
-                    window.setText(Error);
-                    break;
-                }
-                else
-                    result = BigDecimal.valueOf(Math.sqrt(second.doubleValue()));
-            }
+            if (!isValid)
+                break;
 
             i++;
         }
 
-        if (!window.getText().equals(DivisionByZero) && !window.getText().equals(Error))
-            window.setText(result.toString());
-
+        if (isValid)
+            window.setText(result.toPlainString());
     }
 
-    public void onClickButtonDelete(View v)
-    {
+    public void onClickButtonDelete(View v) {
         window.setText(Zero);
     }
 
@@ -163,7 +155,7 @@ public class MainActivity extends AppCompatActivity
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-        String textViewText= savedInstanceState.getString(TextViewTextKey);
+        String textViewText = savedInstanceState.getString(TextViewTextKey);
         TextView nameView = findViewById(R.id.window);
         nameView.setText(textViewText);
     }
