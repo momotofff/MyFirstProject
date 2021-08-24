@@ -1,269 +1,321 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/main_background"
+        android:contentDescription="@string/todo" />
+
     <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="381dp"
-        android:layout_height="90dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/window"
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="381dp"
+            android:layout_height="151dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/window"
+                android:layout_width="match_parent"
+                android:layout_height="73dp"
+                android:clickable="false"
+                android:textColor="#353535"
+                android:textSize="48sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="74dp"
-            android:clickable="false"
-            android:textSize="24sp" />
+            android:layout_height="489dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="100dp"
+                android:layout_height="466dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="124dp"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/_1"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:onClick="onClickButtonNumber"
+                    android:text="@string/_1"
+                    android:textSize="34sp"
+                    app:backgroundTint="#757575"
+                    tools:ignore="UsingOnClickInXml" />
+
+                <Button
+                    android:id="@+id/_7"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:onClick="onClickButtonNumber"
+                    android:text="@string/_7"
+                    android:textSize="34sp"
+                    app:backgroundTint="#757575"
+                    tools:ignore="UsingOnClickInXml" />
+
+                <Button
+                    android:id="@+id/_4"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:onClick="onClickButtonNumber"
+                    android:text="@string/_4"
+                    android:textSize="34sp"
+                    app:backgroundTint="#757575"
+                    tools:ignore="UsingOnClickInXml" />
+
+                <Button
+                    android:id="@+id/_null"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:onClick="onClickButtonNumber"
+                    android:text="@string/_0"
+                    android:textSize="34sp"
+                    app:backgroundTint="#757575"
+                    tools:ignore="UsingOnClickInXml" />
+
+                <Button
+                    android:id="@+id/squareRoot"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:onClick="onClickButtonOperations"
+                    android:text="@string/squareRoot"
+                    android:textSize="48sp"
+                    app:backgroundTint="#2E2E2E"
+                    tools:ignore="UsingOnClickInXml" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="100dp"
+                android:layout_height="468dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginBottom="124dp"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/_2"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:onClick="onClickButtonNumber"
+                    android:text="@string/_2"
+                    android:textSize="34sp"
+                    app:backgroundTint="#757575"
+                    tools:ignore="UsingOnClickInXml" />
+
+                <Button
+                    android:id="@+id/_5"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:onClick="onClickButtonNumber"
+                    android:text="@string/_5"
+                    android:textSize="34sp"
+                    app:backgroundTint="#757575"
+                    tools:ignore="UsingOnClickInXml" />
+
+                <Button
+                    android:id="@+id/_8"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:onClick="onClickButtonNumber"
+                    android:text="@string/_8"
+                    android:textSize="34sp"
+                    app:backgroundTint="#757575"
+                    tools:ignore="UsingOnClickInXml" />
+
+                <Button
+                    android:id="@+id/nulnul"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:onClick="onClickButtonNumber"
+                    android:text="@string/_00"
+                    android:textSize="34sp"
+                    app:backgroundTint="#757575"
+                    tools:ignore="UsingOnClickInXml" />
+
+                <Button
+                    android:id="@+id/percent"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:onClick="onClickButtonOperations"
+                    android:text="@string/percent"
+                    android:textSize="48sp"
+                    app:backgroundTint="#2E2E2E"
+                    tools:ignore="UsingOnClickInXml" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout5"
+                android:layout_width="100dp"
+                android:layout_height="469dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginBottom="124dp"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/_3"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:onClick="onClickButtonNumber"
+                    android:text="@string/_3"
+                    android:textSize="34sp"
+                    app:backgroundTint="#757575"
+                    tools:ignore="UsingOnClickInXml" />
+
+                <Button
+                    android:id="@+id/_9"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:onClick="onClickButtonNumber"
+                    android:text="@string/_9"
+                    android:textSize="34sp"
+                    app:backgroundTint="#757575"
+                    tools:ignore="UsingOnClickInXml" />
+
+                <Button
+                    android:id="@+id/_6"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:onClick="onClickButtonNumber"
+                    android:text="@string/_6"
+                    android:textSize="34sp"
+                    app:backgroundTint="#757575"
+                    tools:ignore="UsingOnClickInXml" />
+
+                <Button
+                    android:id="@+id/dot"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:onClick="onClickButtonNumber"
+                    android:text="@string/dot"
+                    android:textSize="48sp"
+                    app:backgroundTint="#757575"
+                    tools:ignore="UsingOnClickInXml" />
+
+                <Button
+                    android:id="@+id/result2"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:onClick="onClickButtonResult"
+                    android:text="@string/result"
+                    android:textSize="48sp"
+                    app:backgroundTint="#2E2E2E"
+                    tools:ignore="UsingOnClickInXml" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout6"
+                android:layout_width="100dp"
+                android:layout_height="469dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="124dp"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/delete"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:onClick="onClickButtonDelete"
+                    android:text="@string/del"
+                    android:textSize="34sp"
+                    app:backgroundTint="#FF5C28"
+                    tools:ignore="UsingOnClickInXml" />
+
+                <Button
+                    android:id="@+id/plus"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:onClick="onClickButtonOperations"
+                    android:text="@string/plus"
+                    android:textSize="48sp"
+                    app:backgroundTint="#2E2E2E"
+                    tools:ignore="UsingOnClickInXml"
+                    tools:text="+" />
+
+                <Button
+                    android:id="@+id/minus"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:onClick="onClickButtonOperations"
+                    android:text="@string/minus"
+                    android:textSize="48sp"
+                    app:backgroundTint="#2E2E2E"
+                    tools:ignore="UsingOnClickInXml" />
+
+                <Button
+                    android:id="@+id/_multiply"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:onClick="onClickButtonOperations"
+                    android:text="@string/_multiply"
+                    android:textSize="48sp"
+                    app:backgroundTint="#2E2E2E"
+                    tools:ignore="UsingOnClickInXml" />
+
+                <Button
+                    android:id="@+id/division"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:onClick="onClickButtonOperations"
+                    android:text="@string/division"
+                    android:textSize="48sp"
+                    app:backgroundTint="#2E2E2E"
+                    tools:ignore="UsingOnClickInXml" />
+
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="100dp"
-        android:layout_height="500dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="124dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-        <Button
-            android:id="@+id/_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButtonNumber"
-            android:text="@string/_1"
-            android:textSize="24sp"
-            tools:ignore="UsingOnClickInXml" />
-
-        <Button
-            android:id="@+id/_7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButtonNumber"
-            android:text="@string/_7"
-            android:textSize="24sp"
-            tools:ignore="UsingOnClickInXml" />
-
-        <Button
-            android:id="@+id/_4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButtonNumber"
-            android:text="@string/_4"
-            android:textSize="24sp"
-            tools:ignore="UsingOnClickInXml" />
-
-        <Button
-            android:id="@+id/dot"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButtonNumber"
-            android:text="@string/dot"
-            android:textSize="24sp"
-            tools:ignore="UsingOnClickInXml" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="100dp"
-        android:layout_height="500dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginBottom="124dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/linearLayout5"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout3"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-        <Button
-            android:id="@+id/_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButtonNumber"
-            android:text="@string/_2"
-            android:textSize="24sp"
-            tools:ignore="UsingOnClickInXml" />
-
-        <Button
-            android:id="@+id/_5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButtonNumber"
-            android:text="@string/_5"
-            android:textSize="24sp"
-            tools:ignore="UsingOnClickInXml" />
-
-        <Button
-            android:id="@+id/_8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButtonNumber"
-            android:text="@string/_8"
-            android:textSize="24sp"
-            tools:ignore="UsingOnClickInXml" />
-
-        <Button
-            android:id="@+id/_null"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButtonNumber"
-            android:text="@string/_0"
-            android:textSize="24sp"
-            tools:ignore="UsingOnClickInXml" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout5"
-        android:layout_width="100dp"
-        android:layout_height="500dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginBottom="124dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/linearLayout6"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout4"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-        <Button
-            android:id="@+id/_3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButtonNumber"
-            android:text="@string/_3"
-            android:textSize="24sp"
-            tools:ignore="UsingOnClickInXml" />
-
-        <Button
-            android:id="@+id/_9"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButtonNumber"
-            android:text="@string/_9"
-            android:textSize="24sp"
-            tools:ignore="UsingOnClickInXml" />
-
-        <Button
-            android:id="@+id/_6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButtonNumber"
-            android:text="@string/_6"
-            android:textSize="24sp"
-            tools:ignore="UsingOnClickInXml" />
-       <Button
-            android:id="@+id/nulNul"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButtonNumber"
-            android:text="@string/_nulNul"
-            android:textSize="24sp"
-            tools:ignore="UsingOnClickInXml" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout6"
-        android:layout_width="100dp"
-        android:layout_height="500dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="124dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout5"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-        <Button
-            android:id="@+id/plus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButtonOperations"
-            android:text="@string/plus"
-            android:textSize="24sp"
-            tools:ignore="UsingOnClickInXml"
-            tools:text="+" />
-
-        <Button
-            android:id="@+id/minus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButtonOperations"
-            android:text="@string/minus"
-            android:textSize="24sp"
-            tools:ignore="UsingOnClickInXml" />
-
-        <Button
-            android:id="@+id/result2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButtonResult"
-            android:text="@string/result"
-            android:textSize="24sp"
-            tools:ignore="UsingOnClickInXml" />
-
-        <Button
-            android:id="@+id/delete"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButtonDelete"
-            android:text="@string/del"
-            android:textSize="24sp"
-            tools:ignore="UsingOnClickInXml" />
-
-        <Button
-            android:id="@+id/_multiply"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButtonOperations"
-            android:text="@string/_multiply"
-            android:textSize="24sp"
-            tools:ignore="UsingOnClickInXml" />
-
-        <Button
-            android:id="@+id/division"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButtonOperations"
-            android:text="@string/division"
-            android:textSize="24sp"
-            tools:ignore="UsingOnClickInXml" />
-
-        <Button
-            android:id="@+id/squareRoot"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButtonOperations"
-            android:text="@string/squareRoot"
-            android:textSize="24sp"
-            tools:ignore="UsingOnClickInXml" />
-
-        <Button
-            android:id="@+id/percent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButtonOperations"
-            android:text="@string/percent"
-            android:textSize="24sp"
-            tools:ignore="UsingOnClickInXml" />
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

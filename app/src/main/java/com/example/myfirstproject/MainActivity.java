@@ -4,14 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
-
 import java.math.BigDecimal;
 
 
-public class MainActivity extends AppCompatActivity
-{
+public class MainActivity extends AppCompatActivity {
     private TextView window;
     private boolean isValid = true;
 
@@ -25,19 +25,20 @@ public class MainActivity extends AppCompatActivity
         DIVIDE,
         SQUAREROOT,
         UNDEFINED,
+        PROCENT,
     }
 
     private static class Operation {
         final public Op value;
 
         Operation (char ch) {
-            switch (ch)
-            {
+            switch (ch) {
                 case '+': value = Op.PLUS; break;
                 case '-': value = Op.MINUS; break;
                 case '*': value = Op.MULTIPLY; break;
                 case '/': value = Op.DIVIDE; break;
                 case '√': value = Op.SQUAREROOT; break;
+                case '%': value = Op.PROCENT; break;
                 default: value = Op.UNDEFINED; break;
             }
         }
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         window = findViewById(R.id.window);
         window.setText(Zero);
+        Window w = getWindow();
+        w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     private void CheckValidityAndReset() {
@@ -74,15 +77,37 @@ public class MainActivity extends AppCompatActivity
     @SuppressLint("SetTextI18n")
     public void onClickButtonOperations(View v) {
         CheckValidityAndReset();
+        onClickButtonResult(v);
 
         String text = window.getText().toString();
         Operation op = new Operation(text.charAt(text.length() - 1));
 
-        if (op.value == Op.UNDEFINED)
+        if (op.value == Op.UNDEFINED) {
             window.setText(text + " " + ((Button) v).getText().toString() + " ");
+        }
+
+        String[] stringOperations = window.getText().toString().split(" ");
+
+        Operation op2 = new Operation(stringOperations[1].charAt(0));
+        BigDecimal result = new BigDecimal(stringOperations[0]);
+
+        if (op2.value == Op.SQUAREROOT) {
+
+            if (result.intValue() < 0) {
+                isValid = false;
+                window.setText(getResources().getString(R.string.GenericError));
+            }
+            else {
+                result = BigDecimal.valueOf(Math.sqrt(result.doubleValue()));
+                window.setText(result.toString());
+            }
+        }
+
     }
 
+    @SuppressLint("SetTextI18n")
     public void onClickButtonResult(View v) {
+        CheckValidityAndReset();
         String[] stringOperations = window.getText().toString().split(" ");
         BigDecimal result = new BigDecimal(stringOperations[0]);
 
@@ -112,31 +137,29 @@ public class MainActivity extends AppCompatActivity
                 case DIVIDE:
                     if (second.doubleValue() == 0) {
                         isValid = false;
-                        window.setText(getResources().getString(R.string.DivisionByZeroError));
+                        window.setText(getResources().getString(R.string.GenericError));
                     }
                     else {
-                        result = result.divide(second, 8, BigDecimal.ROUND_HALF_UP);
+                        result = result.divide(second, 5, BigDecimal.ROUND_HALF_UP);
                     }
                     break;
-                case SQUAREROOT:
-                    if (second.intValue() < 0) {
+                case PROCENT:
+                    if (second.doubleValue() < 0 || result.doubleValue() < 0) {
                         isValid = false;
                         window.setText(getResources().getString(R.string.GenericError));
                     }
                     else {
-                        result = BigDecimal.valueOf(Math.sqrt(second.doubleValue()));
+                        result = (second.divide(new BigDecimal(100),5, BigDecimal.ROUND_HALF_UP)).multiply(result);
                     }
                     break;
             }
 
             if (!isValid)
                 break;
-
-            i++;
         }
 
         if (isValid)
-            window.setText(result.toPlainString());
+            window.setText(result.toString());
     }
 
     public void onClickButtonDelete(View v) {
