@@ -3,8 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Devel/MyFirstProject/app/src/main/res/drawable/mi_button.xml" value="0.37864583333333335" />
         <entry key="..\:/Devel/MyFirstProject/app/src/main/res/layout-land/activity_main.xml" value="0.31040564373897706" />
-        <entry key="..\:/Devel/MyFirstProject/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Devel/MyFirstProject/app/src/main/res/layout-land/activity_main_two.xml" value="0.2" />
+        <entry key="..\:/Devel/MyFirstProject/app/src/main/res/layout-land/temp.xml" value="0.30687830687830686" />
+        <entry key="..\:/Devel/MyFirstProject/app/src/main/res/layout-port/activity_main_two.xml" value="0.22192028985507245" />
+        <entry key="..\:/Devel/MyFirstProject/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Devel/MyFirstProject/app/src/main/res/layout/temp.xml" value="0.26856884057971014" />
       </map>
     </option>
   </component>
