@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         DIVIDE,
         SQUAREROOT,
         UNDEFINED,
-        PROCENT,
+        PERCENT,
     }
 
     private static class Operation {
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 case '*': value = Op.MULTIPLY; break;
                 case '/': value = Op.DIVIDE; break;
                 case '√': value = Op.SQUAREROOT; break;
-                case '%': value = Op.PROCENT; break;
+                case '%': value = Op.PERCENT; break;
                 default: value = Op.UNDEFINED; break;
             }
         }
@@ -92,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
         BigDecimal result = new BigDecimal(stringOperations[0]);
 
         if (op2.value == Op.SQUAREROOT) {
-
             if (result.intValue() < 0) {
                 isValid = false;
                 window.setText(getResources().getString(R.string.GenericError));
@@ -102,14 +101,21 @@ public class MainActivity extends AppCompatActivity {
                 window.setText(result.toString());
             }
         }
-
     }
 
     @SuppressLint("SetTextI18n")
     public void onClickButtonResult(View v) {
         CheckValidityAndReset();
         String[] stringOperations = window.getText().toString().split(" ");
-        BigDecimal result = new BigDecimal(stringOperations[0]);
+        BigDecimal result;
+
+        try {
+            result = new BigDecimal(stringOperations[0]);
+        }
+        catch (Exception e) {
+            window.setText(Zero);
+            return;
+        }
 
         for (int i = 1; i < stringOperations.length - 1; ++i) {
             Operation op = new Operation(stringOperations[i].charAt(0));
@@ -143,8 +149,8 @@ public class MainActivity extends AppCompatActivity {
                         result = result.divide(second, 5, BigDecimal.ROUND_HALF_UP);
                     }
                     break;
-                case PROCENT:
-                    if (second.doubleValue() < 0 || result.doubleValue() < 0) {
+                case PERCENT:
+                    if (second.doubleValue() < 0) {
                         isValid = false;
                         window.setText(getResources().getString(R.string.GenericError));
                     }
